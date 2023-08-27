@@ -3,6 +3,9 @@ package database
 import (
 	"crypto/md5"
 	"encoding/hex"
+	"fmt"
+	"os"
+	"runtime"
 	"strconv"
 )
 
@@ -30,4 +33,22 @@ func ConvertToMd5(data string) string {
 	hashString := hex.EncodeToString(hashBytes)
 
 	return hashString
+}
+
+// GetPath
+func GetPath() string {
+	baseDir, err := os.UserHomeDir()
+	if err != nil {
+		fmt.Println("Hata:", err)
+	}
+
+	switch runtime.GOOS {
+	case "windows":
+		baseDir += "\\gosecDB\\"
+	case "linux", "darwin":
+		baseDir += "/gosecDB/"
+		break
+	}
+
+	return baseDir
 }

@@ -11,7 +11,9 @@ import (
 
 func GetConfigsObject() []Config {
 	var configs []Config
-	path := "C:\\Users\\Boran\\Desktop\\mygosec\\gosecDB\\config.json"
+
+	// C:\Users\Boran\gosecDB default path bu olucak basedir ile çekersin
+	path := database.GetPath() + "config.json"
 
 	jsonFile, err := os.Open(path)
 	if err != nil {

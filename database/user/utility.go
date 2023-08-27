@@ -10,8 +10,9 @@ import (
 )
 
 func GetUsersObject() []User {
+
 	var users []User
-	path := "C:\\Users\\Boran\\Desktop\\mygosec\\gosecDB\\users.json"
+	path := database.GetPath() + "users.json"
 
 	jsonFile, err := os.Open(path)
 	if err != nil {

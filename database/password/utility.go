@@ -16,7 +16,7 @@ import (
 // Returns all passwords
 func GetPasswordObjects() []Password {
 	var passwords []Password
-	path := "C:\\Users\\Boran\\Desktop\\mygosec\\gosecDB\\password.json"
+	path := database.GetPath() + "password.json"
 
 	jsonFile, err := os.Open(path)
 	if err != nil {
