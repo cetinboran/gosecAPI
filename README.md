@@ -70,8 +70,3 @@ You can use the gosecAPI to manage users, configurations, passwords, and authent
 
 4. If you need to retrieve a specific user, configuration, or password, you can use the endpoints that support fetching by ID.
 
-Remember to include the appropriate HTTP methods, request parameters, and handle the JSON responses according to your application's needs.
-
-Feel free to explore the various endpoints of gosecAPI and integrate them into your GitHub project's backend to enhance the functionality of your gosec password manager.
-
-For more detailed information on each endpoint, request/response examples, and error handling, refer to the respective sections above.
