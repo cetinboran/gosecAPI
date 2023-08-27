@@ -18,7 +18,6 @@ func GetConfigsObject() []Config {
 		fmt.Println("Invalid Path")
 	}
 	defer jsonFile.Close()
-	fmt.Println("Successfully Opened config.json")
 
 	byteValue, _ := io.ReadAll(jsonFile)
 

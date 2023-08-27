@@ -18,7 +18,6 @@ func GetUsersObject() []User {
 		fmt.Println("Invalid Path")
 	}
 	defer jsonFile.Close()
-	fmt.Println("Successfully Opened users.json")
 
 	byteValue, _ := io.ReadAll(jsonFile)
 

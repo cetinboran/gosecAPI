@@ -7,7 +7,10 @@ import (
 	"os"
 
 	"github.com/cetinboran/gosecAPI/database"
+	"github.com/cetinboran/gosecAPI/database/config"
 	"github.com/cetinboran/gosecAPI/database/user"
+	"github.com/cetinboran/gosecAPI/myencode"
+	"github.com/cetinboran/gosecAPI/settings"
 )
 
 // Returns all passwords
@@ -20,7 +23,6 @@ func GetPasswordObjects() []Password {
 		fmt.Println("Invalid Path")
 	}
 	defer jsonFile.Close()
-	fmt.Println("Successfully Opened password.json")
 
 	byteValue, _ := io.ReadAll(jsonFile)
 
@@ -54,5 +56,22 @@ func FindPasswordByUserId(id string, passwords []Password) ([]Password, *databas
 		return nil, GetPasswordError(1)
 	}
 
-	return allPasswords, nil
+	return DecodePasswords(id, allPasswords), nil
+}
+
+func DecodePasswords(userId string, passwords []Password) []Password {
+	// Bu err kontrolleri findpasswordbyuserıd de yapıldığı için _ yazım err yerine
+	config, _ := config.GetConfigByUserId(userId)
+
+	userDecryptedSecret, _ := myencode.Decrypt(settings.GetSecretForSecrets(), config.Secret)
+
+	var newPasswords []Password
+
+	// Burada şifreyi kırıyorum ve kırılmış şifreyi yerleşitiryorum
+	for _, p := range passwords {
+		decrpytedPassword, _ := myencode.Decrypt([]byte(userDecryptedSecret), p.Password)
+		newPasswords = append(newPasswords, Password{p.PasswordId, p.UserId, p.Title, p.Url, decrpytedPassword})
+	}
+
+	return newPasswords
 }
