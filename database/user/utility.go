@@ -43,3 +43,24 @@ func FindUserById(id string, users []User) (*User, *database.MyError) {
 	// UserId -1 dönüyor demekki böyle bir user yok diğer tarafta hata döndürücez.
 	return &User{UserId: -1}, nil
 }
+
+// Checks if the entered id is valid or not.
+func CheckValidUserId(id float64) *database.MyError {
+	users := GetAllUsers()
+
+	check := false
+	for _, u := range users {
+		if u.UserId == id {
+			check = true
+			break
+		} else {
+			check = false
+		}
+	}
+
+	if check {
+		return nil
+	}
+
+	return GetUserError(1)
+}

@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/cetinboran/gosecAPI/database"
+	"github.com/cetinboran/gosecAPI/database/user"
 )
 
 // Returns all passwords
@@ -29,10 +30,16 @@ func GetPasswordObjects() []Password {
 }
 
 func FindPasswordByUserId(id string, passwords []Password) ([]Password, *database.MyError) {
-	userId, err := database.ConverToFloat64(id)
+	userId, convertionErr := database.ConverToFloat64(id)
 
-	if err != nil {
-		return nil, err
+	if convertionErr != nil {
+		return nil, convertionErr
+	}
+
+	// Eğer validIdErr boş değil ise id geçerli değil başka error yolluyoruz
+	validIdErr := user.CheckValidUserId(userId)
+	if validIdErr != nil {
+		return nil, validIdErr
 	}
 
 	var allPasswords []Password
