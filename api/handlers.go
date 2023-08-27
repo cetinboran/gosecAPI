@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/cetinboran/gosecAPI/database/config"
+	"github.com/cetinboran/gosecAPI/database/password"
 	"github.com/cetinboran/gosecAPI/database/user"
 	"github.com/gofiber/fiber/v2"
 )
@@ -27,9 +28,22 @@ func Configs(c *fiber.Ctx) error {
 	return c.JSON(config.GetAllConfigs())
 }
 
-func ConfigWId(c *fiber.Ctx) error {
+func ConfigWUserId(c *fiber.Ctx) error {
 	idStr := c.Params("id")
 	config, err := config.GetConfigByUserId(idStr)
+
+	// Eğer user nil değil ise user döndür nil ise hatayı döndür.
+
+	if config != nil {
+		return c.JSON(config)
+	}
+
+	return c.JSON(err)
+}
+
+func PasswordWUserId(c *fiber.Ctx) error {
+	idStr := c.Params("id")
+	config, err := password.GetPasswordsByUserId(idStr)
 
 	// Eğer user nil değil ise user döndür nil ise hatayı döndür.
 

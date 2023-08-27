@@ -13,14 +13,14 @@ type Config struct {
 func GetAllConfigs() []Config {
 	// struct yolluyacaksın otomatik olarak fiber c.json ile json yapıyor zaten.
 
-	configs := GetUsersObject()
+	configs := GetConfigsObject()
 	return configs
 }
 
 // Finds User By Id
 func GetConfigByUserId(userId string) (*Config, *database.MyError) {
-	users := GetUsersObject()
-	theConfig, err := FindConfigByUserId(userId, users)
+	configs := GetConfigsObject()
+	theConfig, err := FindConfigByUserId(userId, configs)
 
 	// Eğer -1 değil ise Id böyle bir user var user döndür
 	if theConfig != nil {

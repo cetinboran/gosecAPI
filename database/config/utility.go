@@ -9,7 +9,7 @@ import (
 	"github.com/cetinboran/gosecAPI/database"
 )
 
-func GetUsersObject() []Config {
+func GetConfigsObject() []Config {
 	var configs []Config
 	path := "C:\\Users\\Boran\\Desktop\\mygosec\\gosecDB\\config.json"
 
