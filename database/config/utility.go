@@ -17,7 +17,7 @@ func GetConfigsObject() []Config {
 
 	jsonFile, err := os.Open(path)
 	if err != nil {
-		fmt.Println("Invalid Path")
+		fmt.Println("The database could not be found. If you have executed the 'gosec' program and the database did not get created, please provide feedback on github.com/cetinboran/GoSec.")
 	}
 	defer jsonFile.Close()
 
