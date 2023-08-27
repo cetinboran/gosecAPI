@@ -17,5 +17,6 @@ func SetRouters(app *fiber.App) {
 	Config.Get("/:id", api.ConfigWUserId)
 
 	Passwords := app.Group("/passwords")
+
 	Passwords.Get("/:id", api.PasswordWUserId)
 }
